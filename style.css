@@ -120,11 +120,11 @@ a {
 }
 
 #buttons a.inactive {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 body.page-loaded #buttons a.inactive {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 /* ---------------- BACK BUTTON ---------------- */
