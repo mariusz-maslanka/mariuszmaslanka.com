@@ -120,11 +120,11 @@ a {
 }
 
 #buttons a.inactive {
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 body.page-loaded #buttons a.inactive {
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 /* ---------------- BACK BUTTON ---------------- */
@@ -254,12 +254,12 @@ body.page-loaded .home-button {
 
 @media (hover: hover) and (pointer: fine) {
   #buttons a:hover {
-    opacity: 0.6;
+    opacity: 0.4;
     text-decoration-color: currentColor;
   }
 
   body.page-loaded #buttons a:hover {
-    opacity: 0.6;
+    opacity: 0.4;
     text-decoration-color: currentColor;
   }
 
