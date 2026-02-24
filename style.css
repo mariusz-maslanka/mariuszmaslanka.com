@@ -3,9 +3,10 @@
 :root {
   --scale: min(1vw, 1vh);
 
-  --buttons-margin: clamp(10px, 1.4vw, 16px);
+  --layout-margin: clamp(10px, 1.4vw, 16px);
+  --buttons-margin: var(--layout-margin);
   --photo-vertical-buffer: calc(var(--scale) * 9);
-  --photo-side-margin: clamp(10px, 2.6vw, 18px);
+  --photo-side-margin: var(--layout-margin);
   --ui-font-size: clamp(16.5px, calc(0.4vw + 12px), 19.5px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
