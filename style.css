@@ -3,15 +3,17 @@
 :root {
   --scale: min(1vw, 1vh);
 
-  --buttons-margin: clamp(10px, 2.6vw, 18px);
+  --buttons-margin: clamp(10px, 1.4vw, 16px);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: clamp(10px, 2.6vw, 18px);
-  --ui-font-size: clamp(17px, calc(1.1vw + 1px), 23px);
+  --ui-font-size: clamp(15.5px, calc(0.4vw + 11px), 18.5px);
+  --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --safe-top: env(safe-area-inset-top);
   --safe-bottom: env(safe-area-inset-bottom);
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
+  --section-gap: clamp(2.2rem, 3.2vw, 3.2rem);
 }
 
 /* ---------------- RESET ---------------- */
@@ -203,7 +205,7 @@ font-family: cormorant-garamond, serif;
   position: absolute;
   left: 0;
   top: 100%;
-  font-size: calc(var(--ui-font-size) * 0.55);
+  font-size: var(--caption-font-size);
   opacity: 0;
   transition: opacity 0.25s ease-out;
   pointer-events: auto;
@@ -280,7 +282,7 @@ body.page-loaded .home-button {
   text-align: left;
   box-sizing: border-box;
   overflow-wrap: break-word;
-  width: 100%;
+  width: min(100%, 72ch);
   padding-bottom: var(--buttons-margin);
 }
 
@@ -345,7 +347,7 @@ body.page-loaded .home-button {
 em { font-style: italic; }
 .title { font-weight: 400; margin-bottom: 0.6rem; }
 .entry { margin-bottom: 0.6rem; }
-.section { margin-bottom: 4rem; }
+.section { margin-bottom: var(--section-gap); }
 
 /* ---------- PAGE TRANSITION ---------- */
 main {
