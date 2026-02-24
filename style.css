@@ -286,7 +286,7 @@ body.page-loaded .home-button {
   text-align: left;
   box-sizing: border-box;
   overflow-wrap: break-word;
-  width: min(100%, 72ch);
+  width: min(100%, 68ch);
   padding-bottom: var(--buttons-margin);
 }
 
@@ -309,6 +309,7 @@ body.page-loaded .home-button {
   word-wrap: break-word;
   word-break: break-word;
   white-space: normal;
+  text-wrap: pretty;
 }
 
 #cv-content .section:last-child {
@@ -330,6 +331,7 @@ body.page-loaded .home-button {
   overflow-wrap: normal;
   word-break: normal;
   white-space: nowrap;
+  text-wrap: pretty;
 }
 
 #cv-content a,
