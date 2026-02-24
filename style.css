@@ -6,7 +6,7 @@
   --buttons-margin: clamp(10px, 1.4vw, 16px);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: clamp(10px, 2.6vw, 18px);
-  --ui-font-size: clamp(15.5px, calc(0.4vw + 11px), 18.5px);
+  --ui-font-size: clamp(16.5px, calc(0.4vw + 12px), 19.5px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --safe-top: env(safe-area-inset-top);
@@ -14,6 +14,7 @@
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
   --section-gap: clamp(2.2rem, 3.2vw, 3.2rem);
+  --heading-entry-gap: 0.6rem;
 }
 
 /* ---------------- RESET ---------------- */
@@ -239,7 +240,7 @@ font-family: cormorant-garamond, serif;
 /* ---------------- CV & CONTACT PAGES ---------------- */
 
 body:not(.index) main {
-  padding-top: calc(var(--buttons-margin) + 1.5em + var(--nav-gap) + env(safe-area-inset-top));
+  padding-top: calc(var(--buttons-margin) + 1.25em + var(--heading-entry-gap) + env(safe-area-inset-top));
   padding-left: var(--buttons-margin);
   padding-right: var(--buttons-margin);
   box-sizing: border-box;
@@ -345,7 +346,7 @@ body.page-loaded .home-button {
 /* ---------------- TYPOGRAPHY ---------------- */
 
 em { font-style: italic; }
-.title { font-weight: 400; margin-bottom: 0.6rem; }
+.title { font-weight: 400; margin-bottom: var(--heading-entry-gap); }
 .entry { margin-bottom: 0.6rem; }
 .section { margin-bottom: var(--section-gap); }
 
