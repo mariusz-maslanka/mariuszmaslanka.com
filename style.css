@@ -6,7 +6,7 @@
   --buttons-margin: clamp(10px, 2.6vw, 18px);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: clamp(10px, 2.6vw, 18px);
-  --ui-font-size: clamp(16px, 1.1vw, 22px);
+  --ui-font-size: clamp(17px, calc(1.1vw + 1px), 23px);
   --ui-line-height: 1.5;
   --safe-top: env(safe-area-inset-top);
   --safe-bottom: env(safe-area-inset-bottom);
@@ -63,6 +63,7 @@ main {
   right: 0;
   width: 100%;
   font-size: var(--ui-font-size);
+  line-height: 1;
   font-weight: 500;
   z-index: 2;
   pointer-events: none;
@@ -98,6 +99,11 @@ main {
 
 #buttons span {
   text-decoration: none;
+}
+
+#buttons a,
+#buttons span {
+  display: block;
 }
 
 #buttons a {
