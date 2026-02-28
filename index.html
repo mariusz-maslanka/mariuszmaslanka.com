@@ -110,18 +110,62 @@
     const info = document.querySelector("#photo-info");
     const wrapper = document.querySelector("#photo-wrapper");
     const FADE_MS = 300;
+    const AUTO_CHANGE_MS = 5000;
     let currentPhotoNumber = -1;
     let isLoading = false;
+    let autoRotateTimer = null;
+    let preloadedPhotoNumber = -1;
+    let preloadedPhotoImage = null;
+    let preloadInFlight = false;
 
-    function pickRandomPhotoNumber() {
-      if (properties.length <= 1) {
+    function pickRandomPhotoNumber(excludedNumbers = []) {
+      const excluded = new Set([currentPhotoNumber, ...excludedNumbers]);
+      if (properties.length <= excluded.size) {
         return 0;
       }
       let next = Math.floor(Math.random() * properties.length);
-      while (next === currentPhotoNumber) {
+      let attempts = 0;
+      while (excluded.has(next) && attempts < 50) {
         next = Math.floor(Math.random() * properties.length);
+        attempts += 1;
+      }
+      if (excluded.has(next)) {
+        for (let i = 0; i < properties.length; i += 1) {
+          if (!excluded.has(i)) {
+            return i;
+          }
+        }
       }
       return next;
+    }
+
+    function preloadNextPhoto() {
+      if (preloadInFlight || properties.length <= 1) {
+        return;
+      }
+      const excluded = [];
+      if (preloadedPhotoNumber !== -1) {
+        excluded.push(preloadedPhotoNumber);
+      }
+      const next = pickRandomPhotoNumber(excluded);
+      const img = new Image();
+      preloadInFlight = true;
+      img.onload = () => {
+        preloadedPhotoNumber = next;
+        preloadedPhotoImage = img;
+        preloadInFlight = false;
+      };
+      img.onerror = () => {
+        preloadInFlight = false;
+      };
+      img.src = `${next}.jpg`;
+    }
+
+    function getNextPhotoNumber() {
+      if (preloadedPhotoNumber !== -1 && preloadedPhotoNumber !== currentPhotoNumber) {
+        return preloadedPhotoNumber;
+      }
+      return pickRandomPhotoNumber();
     }
 
     function loadPhoto(photoNumber, options = {}) {
@@ -131,6 +175,8 @@
       isLoading = true;
       const src = `${photoNumber}.jpg`;
       const usePlaceholder = options.usePlaceholder !== false;
+      const usePreloaded = preloadedPhotoNumber === photoNumber && preloadedPhotoImage;
+      const preImg = usePreloaded ? preloadedPhotoImage : new Image();
 
       description.innerHTML =
         `<i>${properties[photoNumber].title}</i>, ${properties[photoNumber].description}`;
@@ -140,14 +186,17 @@
         placeholder.style.display = "block";
       }
 
-      const preImg = new Image();
-      preImg.onload = () => {
+      const onLoaded = () => {
         if (usePlaceholder) {
           const ratio = preImg.naturalWidth / preImg.naturalHeight;
           placeholder.style.aspectRatio = ratio;
         }
 
         photo.src = src;
+        if (usePreloaded) {
+          preloadedPhotoNumber = -1;
+          preloadedPhotoImage = null;
+        }
 
         requestAnimationFrame(() => {
           if (usePlaceholder) {
@@ -160,9 +209,24 @@
           photo.classList.add("loaded");
           info.classList.add("loaded");
           isLoading = false;
+          preloadNextPhoto();
         });
       };
-      preImg.src = src;
+      preImg.onerror = () => {
+        if (usePlaceholder) {
+          placeholder.style.display = "none";
+        }
+        isLoading = false;
+        preloadNextPhoto();
+      };
+      if (preImg.complete && preImg.naturalWidth > 0) {
+        onLoaded();
+      } else {
+        preImg.onload = onLoaded;
+        if (!usePreloaded) {
+          preImg.src = src;
+        }
+      }
     }
 
     function loadRandomPhoto() {
@@ -171,50 +235,61 @@
       loadPhoto(next);
     }
 
+    function transitionToRandomPhoto() {
+      if (isLoading) {
+        return;
+      }
+      isLoading = true;
+      const freezeWidth = photo.offsetWidth;
+      if (freezeWidth) {
+        wrapper.style.width = freezeWidth + "px";
+        info.style.width = freezeWidth + "px";
+        photo.style.width = freezeWidth + "px";
+      }
+      let didHandle = false;
+
+      const onFadeOut = (event) => {
+        if (event.propertyName !== "opacity") {
+          return;
+        }
+        photo.removeEventListener("transitionend", onFadeOut);
+        didHandle = true;
+        const next = getNextPhotoNumber();
+        currentPhotoNumber = next;
+        isLoading = false;
+        loadPhoto(next, { usePlaceholder: false });
+      };
+
+      photo.addEventListener("transitionend", onFadeOut);
+      photo.classList.remove("loaded");
+      info.classList.remove("loaded");
+
+      setTimeout(() => {
+        photo.removeEventListener("transitionend", onFadeOut);
+        if (didHandle) {
+          return;
+        }
+        const next = getNextPhotoNumber();
+        currentPhotoNumber = next;
+        isLoading = false;
+        loadPhoto(next, { usePlaceholder: false });
+      }, FADE_MS);
+    }
+
+    function restartAutoRotate() {
+      if (autoRotateTimer) {
+        clearInterval(autoRotateTimer);
+      }
+      autoRotateTimer = setInterval(() => {
+        if (document.hidden) {
+          return;
+        }
+        transitionToRandomPhoto();
+      }, AUTO_CHANGE_MS);
+    }
+
     loadRandomPhoto();
-
-
-
-photo.addEventListener("click", () => {
-  if (isLoading) {
-    return;
-  }
-  isLoading = true;
-  const freezeWidth = photo.offsetWidth;
-  if (freezeWidth) {
-    wrapper.style.width = freezeWidth + "px";
-    info.style.width = freezeWidth + "px";
-    photo.style.width = freezeWidth + "px";
-  }
-  let didHandle = false;
-
-  const onFadeOut = (event) => {
-    if (event.propertyName !== "opacity") {
-      return;
-    }
-    photo.removeEventListener("transitionend", onFadeOut);
-    didHandle = true;
-    const next = pickRandomPhotoNumber();
-    currentPhotoNumber = next;
-    isLoading = false;
-    loadPhoto(next, { usePlaceholder: false });
-  };
-
-  photo.addEventListener("transitionend", onFadeOut);
-  photo.classList.remove("loaded");
-  info.classList.remove("loaded");
-
-  setTimeout(() => {
-    photo.removeEventListener("transitionend", onFadeOut);
-    if (didHandle) {
-      return;
-    }
-    const next = pickRandomPhotoNumber();
-    currentPhotoNumber = next;
-    isLoading = false;
-    loadPhoto(next, { usePlaceholder: false });
-  }, FADE_MS);
-});
+    restartAutoRotate();
 
   window.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
