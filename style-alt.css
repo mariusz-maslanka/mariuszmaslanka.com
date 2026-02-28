@@ -279,7 +279,7 @@ body.page-loaded .home-button {
   text-align: left;
   box-sizing: border-box;
   overflow-wrap: break-word;
-  width: 100%;
+  width: min(100%, 68ch);
   padding-bottom: var(--buttons-margin);
 }
 
@@ -307,7 +307,6 @@ body.page-loaded .home-button {
 #cv-content .section:last-child {
   margin-bottom: var(--nav-gap);
 }
-
 
 #contact-content {
   font-size: var(--ui-font-size);
