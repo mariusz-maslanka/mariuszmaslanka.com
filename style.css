@@ -17,6 +17,8 @@
   --section-gap: clamp(2.2rem, 3.2vw, 3.2rem);
   --heading-entry-gap: 0.75em;
   --content-line-height: 1.5;
+  --entry-gap: 0.4em;
+  --year-gap: 0.8em;
 }
 
 /* ---------------- RESET ---------------- */
@@ -293,6 +295,13 @@ body.page-loaded .home-button {
 #cv-content .section .entry {
   display: block;
 }
+
+#cv-content .section .content,
+#contact-content .section .content {
+  display: flex;
+  flex-direction: column;
+}
+
 #cv-content .section .entry .date {
   display: block;
   margin-bottom: 0.24em;
@@ -356,7 +365,11 @@ em { font-style: italic; }
 #contact-content .title { font-weight: 400; margin-bottom: var(--heading-entry-gap); }
 
 #cv-content .entry,
-#contact-content .entry { margin-bottom: 0.72em; }
+#contact-content .entry { margin-bottom: var(--entry-gap); }
+
+#cv-content .section .content > .entry:has(> .date):not(:first-child) {
+  margin-top: calc(var(--year-gap) - var(--entry-gap));
+}
 
 #cv-content .section,
 #contact-content .section { margin-bottom: 4em; }
