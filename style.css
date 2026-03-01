@@ -20,6 +20,9 @@
   --content-line-height: 1.5;
   --entry-gap: 0em;
   --year-gap: 0.5em;
+  --nav-cv-width: 2.6ch;
+  --nav-contact-width: 6.8ch;
+  --nav-home-width: 4.6ch;
 }
 
 /* ---------------- ESET ---------------- */
@@ -79,9 +82,10 @@ main {
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--nav-cv-width) var(--nav-contact-width) var(--nav-home-width);
   align-items: baseline;
-  gap: 0.35em;
+  column-gap: 0.35em;
   padding: var(--buttons-margin) var(--buttons-margin) 0;
   box-sizing: border-box;
   font-size: var(--ui-font-size);
@@ -95,11 +99,14 @@ main {
 #buttons span {
   position: static;
   color: black;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 #buttons span {
   text-decoration: none;
   color: black;
+  font-style: italic;
 }
 
 #buttons a,
@@ -107,13 +114,17 @@ main {
   display: block;
 }
 
+#buttons > :nth-child(1) { width: 100%; }
+#buttons > :nth-child(2) { width: 100%; }
+#buttons > :nth-child(3) { width: 100%; }
+
 #buttons a {
   color: black;
   text-decoration: underline;
   text-decoration-color: transparent;
   text-decoration-thickness: 0.075em;
   text-underline-offset: 0.075em;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
 }
 
 /* ---------------- NEW UNDERLINE WITH FADE ---------------- */
@@ -124,7 +135,7 @@ a {
   text-decoration-color: transparent;
   text-decoration-thickness: 0.075em;
   text-underline-offset: 0.075em;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
 }
 
 #buttons a.inactive {
@@ -262,17 +273,13 @@ body.page-loaded .home-button {
 
 @media (hover: hover) and (pointer: fine) {
   #buttons a:hover {
-    opacity: 0.4;
+    opacity: 1;
     text-decoration-color: currentColor;
   }
 
   body.page-loaded #buttons a:hover {
-    opacity: 0.4;
-    text-decoration-color: currentColor;
-  }
-
-  body.page-loaded #buttons a.inactive:hover {
     opacity: 1;
+    text-decoration-color: currentColor;
   }
 }
 
@@ -347,7 +354,7 @@ body.page-loaded .home-button {
 
 #cv-content a,
 #contact-content a {
-  transition: text-decoration-color 0.2s ease;
+  transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
 }
 
 #cv-content a:hover,
