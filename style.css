@@ -110,6 +110,11 @@ main {
   font-style: italic;
 }
 
+#buttons > span:nth-child(2),
+#buttons > span:nth-child(3) {
+  transform: translateX(0.06em);
+}
+
 #buttons a,
 #buttons span {
   display: block;
