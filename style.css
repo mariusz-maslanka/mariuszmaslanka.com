@@ -16,14 +16,13 @@
   --nav-right-nudge: 2px;
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
-  --section-gap: clamp(2.2rem, 3.2vw, 3.2rem);
-  --heading-entry-gap: 0.75em;
-  --content-line-height: 1.5;
-  --entry-gap: 0.4em;
-  --year-gap: 0.8em;
+  --heading-entry-gap: 0.4em;
+  --content-line-height: 1.6;
+  --entry-gap: 0em;
+  --year-gap: 0.4em;
 }
 
-/* ---------------- RESET ---------------- */
+/* ---------------- ESET ---------------- */
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -317,11 +316,19 @@ body.page-loaded .home-button {
 }
 
 #cv-content .section .entry .date {
-  display: block;
-  margin-bottom: 0.24em;
+  display: inline;
+  margin-bottom: 0;
   min-width: auto;
   text-align: left;
   overflow-wrap: break-word;
+}
+
+#cv-content .section .entry .date::after {
+  content: ", ";
+}
+
+#cv-content .section .entry .desc {
+  display: inline;
 }
 
 #cv-content,
@@ -387,27 +394,9 @@ em { font-style: italic; }
 }
 
 #cv-content .section,
-#contact-content .section { margin-bottom: 4em; }
+#contact-content .section { margin-bottom: calc(2em * var(--content-line-height)); }
 
 /* ---------- PAGE TRANSITION ---------- */
 main {
   opacity: 1;
-}
-
-@media (max-width: 700px) {
-  #cv-content { width: auto !important; }
-}
-
-/* ---------------- MOBILE ---------------- */
-@media (max-width: 700px) {
-  :root {
-    --mobile-margin: 18px;
-  }
-}
-
-@media (max-width: 700px) {
-  .back-button {
-    left: var(--buttons-margin);
-    text-align: left;
-  }
 }
