@@ -221,8 +221,8 @@ font-family: cormorant-garamond, serif;
   opacity: 0;
   transition: opacity 0.25s ease-out;
   pointer-events: auto;
-  width: auto;
-  text-align: left;
+  width: 100%;
+  text-align: center;
   padding-top: 0.3em;
 }
 
