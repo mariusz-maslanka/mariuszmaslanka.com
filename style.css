@@ -16,10 +16,10 @@
   --nav-right-nudge: 2px;
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
-  --heading-entry-gap: 0.4em;
-  --content-line-height: 1.6;
+  --heading-entry-gap: 0.5em;
+  --content-line-height: 1.5;
   --entry-gap: 0em;
-  --year-gap: 0.4em;
+  --year-gap: 0.5em;
 }
 
 /* ---------------- ESET ---------------- */
