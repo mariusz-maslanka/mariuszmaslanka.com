@@ -3,11 +3,11 @@
 :root {
   --scale: min(1vw, 1vh);
 
-  --layout-margin: clamp(10px, calc(1.4vw + 5px), 21px);
+  --layout-margin: clamp(14px, 1.15vw, 20px);
   --buttons-margin: var(--layout-margin);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--layout-margin);
-  --ui-font-size: clamp(17px, calc(0.35vw + 12px), 19.5px);
+  --ui-font-size: clamp(15.5px, calc(0.76rem + 0.28vw), 19px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --safe-top: env(safe-area-inset-top);
@@ -16,7 +16,7 @@
   --nav-right-nudge: 2px;
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
-  --heading-entry-gap: 0.5em;
+  --title-content-gap: 0.5em;
   --content-line-height: 1.5;
   --entry-gap: 0em;
   --year-gap: 0.5em;
@@ -79,41 +79,22 @@ main {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  padding: var(--buttons-margin) var(--buttons-margin) 0;
+  box-sizing: border-box;
   font-size: var(--ui-font-size);
   line-height: 1;
   font-weight: 500;
   z-index: 2;
-  pointer-events: none;
-}
-
-#buttons a:nth-child(1),
-#buttons span:nth-child(1) {
-  position: absolute;
-  left: var(--buttons-margin);
-  top: var(--buttons-margin);
-  color: black;
   pointer-events: auto;
 }
 
-#buttons a:nth-child(2),
-#buttons span:nth-child(2) {
-  position: absolute;
-  left: calc(50% + (var(--scrollbar-comp) / 2));
-  transform: translateX(-50%);
-  top: var(--buttons-margin);
+#buttons a,
+#buttons span {
+  position: static;
   color: black;
-  pointer-events: auto;
-}
-
-#buttons a:nth-child(3),
-#buttons span:nth-child(3) {
-  position: absolute;
-  right: calc(var(--buttons-margin) - var(--scrollbar-comp) + var(--nav-right-nudge));
-  top: var(--buttons-margin);
-  color: black;
-  pointer-events: auto;
 }
 
 #buttons span {
@@ -258,7 +239,7 @@ font-family: cormorant-garamond, serif;
 /* ---------------- CV & CONTACT PAGES ---------------- */
 
 body:not(.index) main {
-  padding-top: calc(var(--buttons-margin) + 1em + var(--heading-entry-gap) + env(safe-area-inset-top));
+  padding-top: calc(var(--buttons-margin) + 1em + env(safe-area-inset-top));
   padding-left: var(--buttons-margin);
   padding-right: var(--buttons-margin);
   box-sizing: border-box;
@@ -350,18 +331,17 @@ body.page-loaded .home-button {
 #contact-content {
   font-size: var(--ui-font-size);
   line-height: var(--content-line-height);
-  text-align: right;
+  text-align: left;
   box-sizing: border-box;
-  width: 100%;
-  margin-left: 0;
-  max-width: none;
+  overflow-wrap: break-word;
+  width: min(100%, 68ch);
   padding-bottom: var(--buttons-margin);
 }
 
 #contact-content a {
-  overflow-wrap: normal;
-  word-break: normal;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
   text-wrap: pretty;
 }
 
@@ -384,7 +364,7 @@ body.page-loaded .home-button {
 
 em { font-style: italic; }
 #cv-content .title,
-#contact-content .title { font-weight: 400; margin-bottom: var(--heading-entry-gap); }
+#contact-content .title { font-weight: 400; margin-bottom: var(--title-content-gap); }
 
 #cv-content .entry,
 #contact-content .entry { margin-bottom: var(--entry-gap); }
@@ -395,6 +375,11 @@ em { font-style: italic; }
 
 #cv-content .section,
 #contact-content .section { margin-bottom: calc(2em * var(--content-line-height)); }
+
+#cv-content > .section:first-child,
+#contact-content > .section:first-child {
+  margin-top: var(--title-content-gap);
+}
 
 /* ---------- PAGE TRANSITION ---------- */
 main {
