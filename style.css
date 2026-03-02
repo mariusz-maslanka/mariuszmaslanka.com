@@ -3,14 +3,14 @@
 :root {
   --scale: min(1vw, 1vh);
 
-  --layout-margin: clamp(14px, 1.15vw, 20px);
+  --layout-margin: clamp(10px, 1vw, 20px);
   --buttons-margin: var(--layout-margin);
-  --side-margin: calc(var(--layout-margin) + 2px);
+  --side-margin: calc(var(--layout-margin) + 5px);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--side-margin);
-  --ui-font-size: clamp(14px, calc(0.7rem + 0.3vw), 20px);
+  --ui-font-size: clamp(16px, calc(0.7rem + 0.3vw), 20px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
-  --ui-line-height: 2;
+  --ui-line-height: 1.5;
   --safe-top: env(safe-area-inset-top);
   --safe-bottom: env(safe-area-inset-bottom);
   --scrollbar-comp: calc(100vw - 100%);
