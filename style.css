@@ -329,9 +329,10 @@ body.page-loaded .home-button {
 #cv-content .section,
 #cv-content .entry,
 #cv-content .desc {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
   white-space: normal;
   text-wrap: pretty;
 }
