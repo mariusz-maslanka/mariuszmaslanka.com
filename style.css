@@ -16,10 +16,10 @@
   --nav-right-nudge: 2px;
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
-  --title-content-gap: 0.5em;
+  --title-content-gap: 0.4em;
   --content-line-height: 1.5;
   --entry-gap: 0em;
-  --year-gap: 0.5em;
+  --year-gap: 0.4em;
   --nav-cv-width: 2.6ch;
   --nav-contact-width: 6.8ch;
   --nav-home-width: 4.6ch;
@@ -296,6 +296,7 @@ body.page-loaded .home-button {
   box-sizing: border-box;
   overflow-wrap: break-word;
   width: min(100%, 68ch);
+  padding-top: var(--title-content-gap);
   padding-bottom: var(--buttons-margin);
 }
 
@@ -349,6 +350,7 @@ body.page-loaded .home-button {
   box-sizing: border-box;
   overflow-wrap: break-word;
   width: min(100%, 68ch);
+  padding-top: var(--title-content-gap);
   padding-bottom: var(--buttons-margin);
 }
 
@@ -390,10 +392,6 @@ em { font-style: italic; }
 #cv-content .section,
 #contact-content .section { margin-bottom: calc(2em * var(--content-line-height)); }
 
-#cv-content > .section:first-child,
-#contact-content > .section:first-child {
-  margin-top: var(--title-content-gap);
-}
 
 /* ---------- PAGE TRANSITION ---------- */
 main {
