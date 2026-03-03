@@ -195,7 +195,6 @@ body:not(.index) main {
 #cv-content,
 #contact-content {
   width: min(100%, 68ch);
-  padding-top: var(--section-entry-gap);
   padding-bottom: var(--layout-margin);
   box-sizing: border-box;
   font-size: var(--ui-font-size);
