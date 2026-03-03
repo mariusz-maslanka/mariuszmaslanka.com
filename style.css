@@ -1,33 +1,27 @@
-/* ---------------- ROOT VARIABLES ---------------- */
-
 :root {
   --scale: min(1vw, 1vh);
-
   --layout-margin: clamp(10px, 1vw, 20px);
-  --buttons-margin: var(--layout-margin);
-  --side-margin: calc(var(--layout-margin) + 5px);
+  --content-side-margin: var(--layout-margin);
   --photo-vertical-buffer: calc(var(--scale) * 9);
-  --photo-side-margin: var(--side-margin);
-  --ui-font-size: clamp(16px, calc(0.7rem + 0.3vw), 20px);
+  --photo-side-margin: var(--content-side-margin);
+
+  --ui-font-size: clamp(16px, calc(0.75rem + 0.3vw), 24px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
+  --content-line-height: 2;
+  --entry-line-height: var(--content-line-height);
+  --entry-inner-line-height: var(--content-line-height);
+  --entry-gap: 0.5em;
+  --section-entry-gap: 0.5em;
+  --year-gap: var(--entry-gap);
+
   --safe-top: env(safe-area-inset-top);
-  --safe-bottom: env(safe-area-inset-bottom);
-  --scrollbar-comp: calc(100vw - 100%);
-  --nav-right-nudge: 2px;
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
-  --title-content-gap: 0em;
-  --content-line-height: 2;
-  --entry-line-height: 2;
-  --entry-gap: 0em;
-  --year-gap: 0em;
   --nav-cv-width: 2.6ch;
   --nav-contact-width: 6.8ch;
   --nav-home-width: 4.6ch;
 }
-
-/* ---------------- ESET ---------------- */
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -54,10 +48,6 @@ body {
   overscroll-behavior: none;
 }
 
-body:not(.index) {
-  overflow-y: auto;
-}
-
 @supports (overflow: overlay) {
   body:not(.index) {
     overflow-y: overlay;
@@ -70,15 +60,14 @@ body.index {
 
 main {
   flex: 1;
-  background: white;
   min-height: 0;
+  background: white;
+  opacity: 1;
 }
 
 .index main {
   overflow: hidden;
 }
-
-/* ---------------- BUTTONS ---------------- */
 
 #buttons {
   position: fixed;
@@ -88,27 +77,25 @@ main {
   grid-template-columns: var(--nav-cv-width) var(--nav-contact-width) var(--nav-home-width);
   align-items: baseline;
   column-gap: 0.4em;
-  padding: var(--buttons-margin) var(--side-margin) 0;
+  padding: var(--layout-margin) var(--content-side-margin) 0;
   box-sizing: border-box;
   font-size: var(--ui-font-size);
   line-height: var(--content-line-height);
   font-weight: 500;
   z-index: 2;
-  pointer-events: auto;
 }
 
 #buttons a,
 #buttons span {
-  position: static;
+  display: block;
   color: black;
-  flex: 0 0 auto;
+  line-height: var(--content-line-height);
   white-space: nowrap;
   letter-spacing: 0.01em;
 }
 
 #buttons span {
   text-decoration: none;
-  color: black;
   font-style: italic;
 }
 
@@ -118,25 +105,6 @@ main {
 }
 
 #buttons a,
-#buttons span {
-  display: block;
-}
-
-#buttons > :nth-child(1) { width: 100%; }
-#buttons > :nth-child(2) { width: 100%; }
-#buttons > :nth-child(3) { width: 100%; }
-
-#buttons a {
-  color: black;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-decoration-thickness: 0.075em;
-  text-underline-offset: 0.075em;
-  transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
-}
-
-/* ---------------- NEW UNDERLINE WITH FADE ---------------- */
-
 a {
   color: black;
   text-decoration: underline;
@@ -147,49 +115,16 @@ a {
 }
 
 #buttons a.inactive {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
-body.page-loaded #buttons a.inactive {
-  opacity: 0.4;
+#buttons a.inactive:hover,
+#buttons a.inactive:focus-visible,
+#cv-content a:hover,
+#contact-content a:hover {
+  opacity: 1;
+  text-decoration-color: currentColor;
 }
-
-/* ---------------- BACK BUTTON ---------------- */
-.back-button {
-  position: fixed;
-  left: var(--buttons-margin);
-  bottom: var(--buttons-margin);
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: opacity 0.25s ease;
-}
-
-.arrow {
-font-family: cormorant-garamond, serif;
-}
-
-/* ---------------- HOME BUTTON ---------------- */
-.home-button {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  transition: opacity 0.25s ease-out;
-  z-index: 1;
-  margin-top: 0.6rem;
-  margin-bottom: var(--buttons-margin);
-  opacity: 0;
-}
-
-.home-button .arrow {
-  font-family: eb-garamond, serif;
-  font-variant-emoji: text;
-  font-size: calc(var(--ui-font-size) + 3px);
-}
-
-/* ---------------- INDEX — GALLERY ---------------- */
 
 .index #gallery {
   display: flex;
@@ -214,27 +149,10 @@ font-family: cormorant-garamond, serif;
   height: auto;
   max-height: calc(100dvh - 2 * var(--photo-vertical-buffer));
   max-width: 100%;
+  margin: 0;
   object-fit: contain;
-  margin: 0;
   opacity: 0;
   transition: opacity 0.25s ease-out;
-}
-
-#photo-info {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  font-size: var(--caption-font-size);
-  opacity: 0;
-  transition: opacity 0.25s ease-out;
-  pointer-events: auto;
-  width: 100%;
-  text-align: center;
-  padding-top: 0.3em;
-}
-
-#photo-info p {
-  margin: 0;
 }
 
 #photo-placeholder {
@@ -242,90 +160,49 @@ font-family: cormorant-garamond, serif;
   background: transparent;
 }
 
-#photo.loaded {
-  opacity: 1;
-}
-
-#photo-info.loaded {
-  opacity: 1;
-}
-
-@keyframes photoFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ---------------- CV & CONTACT PAGES ---------------- */
-
-body:not(.index) main {
-  padding-top: calc(var(--buttons-margin) + (1em * var(--content-line-height)) + env(safe-area-inset-top));
-  padding-left: var(--side-margin);
-  padding-right: var(--side-margin);
-  box-sizing: border-box;
-}
-
-#cv-content,
-#contact-content {
+#photo-info {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  padding-top: 0.3em;
+  font-size: var(--caption-font-size);
+  font-weight: 400;
+  text-align: center;
+  pointer-events: auto;
   opacity: 0;
   transition: opacity 0.25s ease-out;
 }
 
+#photo-info p {
+  margin: 0;
+}
+
+#photo.loaded,
+#photo-info.loaded,
 body.page-loaded #cv-content,
 body.page-loaded #contact-content {
   opacity: 1;
 }
 
-body.page-loaded .home-button {
-  opacity: 1;
+body:not(.index) main {
+  padding-top: calc(var(--layout-margin) + (1em * var(--content-line-height)) + var(--safe-top));
+  padding-left: var(--content-side-margin);
+  padding-right: var(--content-side-margin);
+  box-sizing: border-box;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  #buttons a:hover {
-    opacity: 1;
-    text-decoration-color: currentColor;
-  }
-
-  body.page-loaded #buttons a:hover {
-    opacity: 1;
-    text-decoration-color: currentColor;
-  }
-}
-
-#cv-content {
+#cv-content,
+#contact-content {
+  width: min(100%, 68ch);
+  padding-top: var(--section-entry-gap);
+  padding-bottom: var(--layout-margin);
+  box-sizing: border-box;
   font-size: var(--ui-font-size);
   line-height: var(--content-line-height);
   text-align: left;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-  width: min(100%, 68ch);
-  padding-top: 0;
-  padding-bottom: var(--buttons-margin);
-}
-
-#cv-content .section .entry {
-  display: block;
-}
-
-#cv-content .section .content,
-#contact-content .section .content {
-  display: flex;
-  flex-direction: column;
-}
-
-#cv-content .section .entry .date {
-  display: inline;
-  margin-bottom: 0;
-  min-width: auto;
-  text-align: left;
-  overflow-wrap: break-word;
-}
-
-#cv-content .section .entry .date::after {
-  content: ", ";
-}
-
-#cv-content .section .entry .desc {
-  display: inline;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
 }
 
 #cv-content,
@@ -340,20 +217,8 @@ body.page-loaded .home-button {
   text-wrap: pretty;
 }
 
-#cv-content .section:last-child {
-  margin-bottom: var(--nav-gap);
-}
-
-
 #contact-content {
-  font-size: var(--ui-font-size);
-  line-height: var(--content-line-height);
-  text-align: left;
-  box-sizing: border-box;
   overflow-wrap: break-word;
-  width: min(100%, 68ch);
-  padding-top: 0;
-  padding-bottom: var(--buttons-margin);
 }
 
 #contact-content a {
@@ -363,26 +228,38 @@ body.page-loaded .home-button {
   text-wrap: pretty;
 }
 
-#cv-content a,
-#contact-content a {
-  transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
+#cv-content .section .content,
+#contact-content .section .content {
+  display: flex;
+  flex-direction: column;
 }
 
-#cv-content a:hover,
-#contact-content a:hover {
-  text-decoration-color: currentColor;
+#cv-content .section .entry .date,
+#cv-content .section .entry .desc {
+  display: inline;
 }
 
-#contact-content .section:last-child {
-  margin-bottom: var(--nav-gap);
+#cv-content .section .entry .date {
+  min-width: auto;
+  margin-bottom: 0;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 
+#cv-content .section .entry .date::after {
+  content: ", ";
+}
 
-/* ---------------- TYPOGRAPHY ---------------- */
+#cv-content .section .entry .desc {
+  display: inline;
+  line-height: var(--entry-inner-line-height);
+}
 
-em { font-style: italic; }
 #cv-content .title,
-#contact-content .title { font-weight: 400; margin-bottom: var(--title-content-gap); }
+#contact-content .title {
+  font-weight: 400;
+  margin-bottom: var(--section-entry-gap);
+}
 
 #cv-content .entry,
 #contact-content .entry {
@@ -390,15 +267,24 @@ em { font-style: italic; }
   margin-bottom: var(--entry-gap);
 }
 
+#cv-content .section .content > .entry:has(.desc br) {
+  margin-bottom: calc((var(--entry-line-height) - var(--entry-inner-line-height)) * 1em + var(--entry-gap));
+}
+
 #cv-content .section .content > .entry:has(> .date):not(:first-child) {
   margin-top: calc(var(--year-gap) - var(--entry-gap));
 }
 
 #cv-content .section,
-#contact-content .section { margin-bottom: calc(2em * var(--content-line-height)); }
+#contact-content .section {
+  margin-bottom: calc(2em * var(--content-line-height));
+}
 
+#cv-content .section:last-child,
+#contact-content .section:last-child {
+  margin-bottom: var(--nav-gap);
+}
 
-/* ---------- PAGE TRANSITION ---------- */
-main {
-  opacity: 1;
+em {
+  font-style: italic;
 }
