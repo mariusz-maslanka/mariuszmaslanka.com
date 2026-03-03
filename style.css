@@ -1,18 +1,18 @@
 :root {
   --scale: min(1vw, 1vh);
   --layout-margin: clamp(10px, 1vw, 20px);
-  --content-side-margin: var(--layout-margin);
+  --content-side-margin: calc(var(--layout-margin) + 0.35vw);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
 
   --ui-font-size: clamp(16px, calc(0.75rem + 0.3vw), 24px);
-  --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
+  --caption-font-size: clmp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
-  --content-line-height: 2;
+  --content-line-height: 1.75;
   --entry-line-height: var(--content-line-height);
   --entry-inner-line-height: var(--content-line-height);
-  --entry-gap: 0.5em;
-  --section-entry-gap: 0.5em;
+  --entry-gap: 0.75em;
+  --section-entry-gap: 0.75em;
   --year-gap: var(--entry-gap);
 
   --safe-top: env(safe-area-inset-top);
