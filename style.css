@@ -11,7 +11,7 @@
   --content-line-height: 2;
   --entry-line-height: var(--entry-inner-line-height);
   --entry-inner-line-height: 1.5;
-  --entry-gap: 0.75em;
+  --entry-gap: 1em;
   --section-entry-gap: 0.5em;
 
   --safe-top: env(safe-area-inset-top);
