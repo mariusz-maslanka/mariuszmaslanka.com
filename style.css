@@ -92,20 +92,15 @@ body.index #buttons {
   left: 0;
 }
 
-#buttons.is-hidden {
-  opacity: 0 !important;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 #buttons a,
 #buttons span {
-  display: block;
+  display: inline-block;
   color: black;
   line-height: var(--content-line-height);
   white-space: nowrap;
   letter-spacing: 0.01em;
   align-self: start;
+  justify-self: start;
 }
 
 #buttons span {
@@ -125,7 +120,6 @@ body.index #buttons {
   transform: translateX(0.06em);
 }
 
-#buttons a,
 a {
   color: black;
   text-decoration: underline;
@@ -135,15 +129,22 @@ a {
   transition: opacity 0.25s ease, text-decoration-color 0.25s ease, transform 0.25s ease;
 }
 
+#buttons a {
+  transition-property: color, text-decoration-color;
+  transition-duration: 0.25s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+  opacity: 1;
+}
+
 #buttons a.inactive {
-  opacity: 0.5;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 #buttons a.inactive:hover,
-#buttons a.inactive:focus-visible,
 #cv-content a:hover,
 #contact-content a:hover {
-  opacity: 1;
+  color: rgba(0, 0, 0, 1);
   text-decoration-color: currentColor;
 }
 
@@ -298,16 +299,11 @@ body:not(.index) main {
   opacity: 0.9;
 }
 
-#contact-content .section > a {
-  opacity: 0.9;
-}
-
 #cv-content .section,
 #contact-content .section {
   margin-bottom: calc(2em * var(--content-line-height));
 }
 
-/* Keep nav -> first line rhythm aligned with title -> first entry rhythm */
 #cv-content > .section:first-child,
 #contact-content > .section:first-child {
   margin-top: var(--section-entry-gap);
