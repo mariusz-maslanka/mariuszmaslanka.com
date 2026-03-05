@@ -6,7 +6,7 @@
   --photo-side-margin: var(--content-side-margin);
 
   --ui-font-size: clamp(16px, calc(0.75rem + 0.3vw), 24px);
-  --nav-font-size: clamp(18px, calc(0.82rem + 0.32vw), 26px);
+  --nav-font-size: clamp(17px, calc(0.76rem + 0.32vw), 25px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --content-line-height: 2;
