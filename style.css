@@ -6,6 +6,7 @@
   --photo-side-margin: var(--content-side-margin);
 
   --ui-font-size: clamp(16px, calc(0.75rem + 0.3vw), 24px);
+  --nav-font-size: clamp(18px, calc(0.82rem + 0.32vw), 26px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --content-line-height: 2;
@@ -69,19 +70,32 @@ main {
 }
 
 #buttons {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
   display: grid;
   grid-template-columns: var(--nav-cv-width) var(--nav-contact-width) var(--nav-home-width);
-  align-items: baseline;
+  align-items: start;
   column-gap: 0.4em;
-  padding: var(--layout-margin) var(--content-side-margin) 0;
+  padding: calc(var(--layout-margin) + var(--safe-top)) var(--content-side-margin) 0;
   box-sizing: border-box;
-  font-size: var(--ui-font-size);
+  font-size: var(--nav-font-size);
   line-height: var(--content-line-height);
   font-weight: 500;
   z-index: 2;
+  will-change: opacity;
+  transition: opacity 0.25s ease;
+}
+
+body.index #buttons {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#buttons.is-hidden {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 #buttons a,
@@ -91,11 +105,19 @@ main {
   line-height: var(--content-line-height);
   white-space: nowrap;
   letter-spacing: 0.01em;
+  align-self: start;
 }
 
 #buttons span {
   text-decoration: none;
   font-style: italic;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#buttons .cv-nav {
+  display: inline-block;
+  transform: translateY(0);
+  transform-origin: left top;
 }
 
 #buttons > span:nth-child(2),
@@ -110,7 +132,7 @@ a {
   text-decoration-color: transparent;
   text-decoration-thickness: 0.075em;
   text-underline-offset: 0.075em;
-  transition: opacity 0.25s ease, text-decoration-color 0.25s ease;
+  transition: opacity 0.25s ease, text-decoration-color 0.25s ease, transform 0.25s ease;
 }
 
 #buttons a.inactive {
@@ -175,6 +197,7 @@ a {
 
 #photo-info p {
   margin: 0;
+  opacity: 0.9;
 }
 
 #photo.loaded,
@@ -185,7 +208,7 @@ body.page-loaded #contact-content {
 }
 
 body:not(.index) main {
-  padding-top: calc(var(--layout-margin) + (1em * var(--content-line-height)) + var(--safe-top));
+  padding-top: 0;
   padding-left: var(--content-side-margin);
   padding-right: var(--content-side-margin);
   box-sizing: border-box;
@@ -254,19 +277,40 @@ body:not(.index) main {
 
 #cv-content .title,
 #contact-content .title {
+  font-size: var(--nav-font-size);
   font-weight: 400;
   margin-bottom: var(--section-entry-gap);
+  transition: opacity 0.25s ease;
+}
+
+#cv-content .title {
+  position: sticky;
+  top: calc(var(--layout-margin) + var(--safe-top));
+  z-index: 1;
+  background: transparent;
+  will-change: opacity;
 }
 
 #cv-content .entry,
 #contact-content .entry {
   line-height: var(--entry-line-height);
   margin-bottom: var(--entry-gap);
+  opacity: 0.9;
+}
+
+#contact-content .section > a {
+  opacity: 0.9;
 }
 
 #cv-content .section,
 #contact-content .section {
   margin-bottom: calc(2em * var(--content-line-height));
+}
+
+/* Keep nav -> first line rhythm aligned with title -> first entry rhythm */
+#cv-content > .section:first-child,
+#contact-content > .section:first-child {
+  margin-top: var(--section-entry-gap);
 }
 
 #cv-content .section:last-child,

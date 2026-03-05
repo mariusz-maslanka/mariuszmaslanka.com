@@ -21,7 +21,7 @@
 
 <body>
   <div id="buttons">
-    <span>CV</span>
+    <span class="cv-nav">CV</span>
     <a href="/contact" class="inactive">Contact</a>
     <a href="/" class="inactive home-nav">Home</a>
   </div>
@@ -30,9 +30,9 @@
 
       <!-- HEADER -->
       <div class="section">
-        <div class="header-content">
-          Mariusz Maślanka<br />
-          b. 1992, based in Oslo, Norway
+        <div class="entry header-content">
+          <span class="header-name">Mariusz Maślanka</span><br />
+          <span class="header-meta">b. 1992, based in Oslo, Norway</span>
         </div>
       </div>
       
@@ -146,6 +146,99 @@
     requestAnimationFrame(() => {
       document.body.classList.add('page-loaded');
     });
+
+    const buttons = document.querySelector('#buttons');
+    const headerContent = document.querySelector('#cv-content .header-content');
+    const titles = Array.from(document.querySelectorAll('#cv-content .title'));
+    if (!buttons || !headerContent || titles.length === 0) return;
+    const sectionByTitle = new Map();
+
+    // Move section titles outside .section so sticky is not constrained by section bounds.
+    titles.forEach((title) => {
+      const section = title.closest('.section');
+      if (!section || !section.parentNode) return;
+      sectionByTitle.set(title, section);
+      section.parentNode.insertBefore(title, section);
+    });
+
+    const getStickyTop = () => {
+      const styles = getComputedStyle(document.documentElement);
+      const layoutMargin = parseFloat(styles.getPropertyValue('--layout-margin')) || 0;
+      const safeTop = parseFloat(styles.getPropertyValue('--safe-top')) || 0;
+      return layoutMargin + safeTop;
+    };
+
+    const updateScrollEffects = () => {
+      const stickyTop = getStickyTop();
+      const navFontSize = parseFloat(getComputedStyle(buttons).fontSize) || 16;
+      const navHideLine = stickyTop + 30 - (0.5 * navFontSize);
+      const firstTitleTop = titles[0].getBoundingClientRect().top;
+      const headerLineHeight = parseFloat(getComputedStyle(headerContent).lineHeight) || 0;
+      const firstTitleLineHeight = parseFloat(getComputedStyle(titles[0]).lineHeight) || headerLineHeight;
+      const navStartFadeY = headerContent.getBoundingClientRect().bottom - headerLineHeight;
+      // Fully disappear on the same line as the first section title.
+      const navEndFadeY = firstTitleTop;
+      let navOpacity = 1;
+      if (navHideLine >= navEndFadeY) {
+        navOpacity = 0;
+      } else if (navHideLine > navStartFadeY) {
+        const span = Math.max(1, navEndFadeY - navStartFadeY);
+        navOpacity = (navEndFadeY - navHideLine) / span;
+      }
+      if (navOpacity <= 0.02) navOpacity = 0;
+      buttons.classList.remove('is-hidden');
+      buttons.style.opacity = String(navOpacity);
+      buttons.style.pointerEvents = navOpacity <= 0.01 ? 'none' : 'auto';
+
+      const titleHideLine = stickyTop - 10;
+      titles.forEach((title, index) => {
+        const section = sectionByTitle.get(title);
+        if (!section) return;
+        const nextTitle = titles[index + 1];
+        const sectionRect = section.getBoundingClientRect();
+        const titleHeight = title.getBoundingClientRect().height;
+        const sectionLineHeight = parseFloat(getComputedStyle(section).lineHeight) || 0;
+        const startFadeY = sectionRect.bottom - (2 * sectionLineHeight); // one line earlier than last line
+        let opacity = 1;
+
+        if (nextTitle) {
+          const nextRect = nextTitle.getBoundingClientRect();
+          const nextLineHeight = parseFloat(getComputedStyle(nextTitle).lineHeight) || sectionLineHeight;
+          // Fully disappear one full line above the next section title.
+          const endFadeY = nextRect.top - nextLineHeight;
+          if (titleHideLine >= endFadeY) {
+            opacity = 0;
+          } else if (titleHideLine <= startFadeY) {
+            opacity = 1;
+          } else {
+            const span = Math.max(1, endFadeY - startFadeY);
+            opacity = (endFadeY - titleHideLine) / span;
+          }
+        } else {
+          const remaining = sectionRect.bottom - titleHideLine - titleHeight;
+          const fadeRange = Math.max(1, sectionLineHeight * 1.5);
+          opacity = Math.max(0, Math.min(1, remaining / fadeRange));
+        }
+
+        if (opacity <= 0.02) opacity = 0;
+        title.style.opacity = opacity.toFixed(3);
+        title.style.transform = 'translateY(0)';
+      });
+    };
+
+    let ticking = false;
+    const onScrollOrResize = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        updateScrollEffects();
+        ticking = false;
+      });
+    };
+
+    updateScrollEffects();
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
   });
 
 </script>
