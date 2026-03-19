@@ -18,9 +18,9 @@
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
   --nav-gap: 0.6rem;
-  --nav-cv-width: 2.6ch;
-  --nav-contact-width: 6.8ch;
-  --nav-home-width: 4.6ch;
+  --nav-cv-width: 3.2ch;
+  --nav-contact-width: 8.8ch;
+  --nav-home-width: 5.4ch;
 }
 
 html {
@@ -73,9 +73,9 @@ main {
   position: sticky;
   top: 0;
   display: grid;
-  grid-template-columns: var(--nav-cv-width) var(--nav-contact-width) var(--nav-home-width);
+  grid-template-columns: repeat(3, max-content);
   align-items: start;
-  column-gap: 0.4em;
+  column-gap: 0.6em;
   padding: calc(var(--layout-margin) + var(--safe-top)) var(--content-side-margin) 0;
   box-sizing: border-box;
   font-size: var(--nav-font-size);
@@ -99,6 +99,7 @@ body.index #buttons {
   line-height: var(--content-line-height);
   white-space: nowrap;
   letter-spacing: 0.01em;
+  text-transform: uppercase;
   align-self: start;
   justify-self: start;
 }
