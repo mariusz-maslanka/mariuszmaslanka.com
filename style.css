@@ -5,8 +5,9 @@
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
 
-  --ui-font-size: clamp(16px, calc(0.75rem + 0.3vw), 24px);
-  --nav-font-size: clamp(17px, calc(0.76rem + 0.32vw), 25px);
+  --base-font-size: clamp(18px, calc(0.9rem + 0.3vw), 28px);
+  --ui-font-size: var(--base-font-size);
+  --nav-font-size: var(--base-font-size);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --content-line-height: 2;
@@ -126,25 +127,29 @@ a {
   text-decoration-color: transparent;
   text-decoration-thickness: 0.075em;
   text-underline-offset: 0.075em;
-  transition: opacity 0.25s ease, text-decoration-color 0.25s ease, transform 0.25s ease;
+  transition: none;
 }
 
 #buttons a {
   transition-property: color, text-decoration-color;
-  transition-duration: 0.25s;
+  transition-duration: 0s;
   transition-timing-function: linear;
   transition-delay: 0s;
   opacity: 1;
 }
 
 #buttons a.inactive {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.25);
 }
 
 #buttons a.inactive:hover,
 #cv-content a:hover,
 #contact-content a:hover {
   color: rgba(0, 0, 0, 1);
+}
+
+#cv-content a:hover,
+#contact-content a:hover {
   text-decoration-color: currentColor;
 }
 
@@ -198,7 +203,7 @@ a {
 
 #photo-info p {
   margin: 0;
-  opacity: 0.9;
+  opacity: 0.75;
 }
 
 #photo.loaded,
@@ -296,7 +301,7 @@ body:not(.index) main {
 #contact-content .entry {
   line-height: var(--entry-line-height);
   margin-bottom: var(--entry-gap);
-  opacity: 0.9;
+  opacity: 1;
 }
 
 #cv-content .section,
