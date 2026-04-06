@@ -76,7 +76,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, max-content);
   align-items: start;
-  column-gap: 1em;
+  column-gap: 0.75em;
   padding: calc(var(--layout-margin) + var(--safe-top)) var(--content-side-margin) 0;
   box-sizing: border-box;
   font-size: var(--nav-font-size);
