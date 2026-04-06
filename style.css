@@ -5,14 +5,14 @@
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
 
-  --base-font-size: clamp(18px, calc(0.9rem + 0.3vw), 28px);
+  --base-font-size: clamp(17px, calc(0.84rem + 0.26vw), 26px);
   --ui-font-size: var(--base-font-size);
-  --nav-font-size: clamp(20px, calc(1rem + 0.3vw), 32px);
+  --nav-font-size: calc(var(--base-font-size) + 3px);
   --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
   --ui-line-height: 1.5;
   --content-line-height: 2;
   --entry-line-height: var(--entry-inner-line-height);
-  --entry-inner-line-height: 1.5;
+  --entry-inner-line-height: 1.65;
   --entry-gap: 0.5em;
   --section-entry-gap: 0.5em;
 
