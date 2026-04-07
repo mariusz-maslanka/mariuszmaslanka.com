@@ -59,6 +59,10 @@ body.index {
   overflow: hidden;
 }
 
+body.contact {
+  overflow: hidden;
+}
+
 main {
   flex: 1;
   min-height: 0;

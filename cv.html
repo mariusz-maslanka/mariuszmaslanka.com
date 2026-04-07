@@ -170,14 +170,12 @@
 
     const updateScrollEffects = () => {
       const stickyTop = getStickyTop();
-      const navFontSize = parseFloat(getComputedStyle(buttons).fontSize) || 16;
-      const navHideLine = stickyTop + 30 - (0.5 * navFontSize);
+      const navHideLine = stickyTop - 10;
       const firstTitleTop = titles[0].getBoundingClientRect().top;
       const headerLineHeight = parseFloat(getComputedStyle(headerContent).lineHeight) || 0;
       const firstTitleLineHeight = parseFloat(getComputedStyle(titles[0]).lineHeight) || headerLineHeight;
-      const navStartFadeY = headerContent.getBoundingClientRect().bottom - headerLineHeight;
-      // Fully disappear on the same line as the first section title.
-      const navEndFadeY = firstTitleTop;
+      const navStartFadeY = headerContent.getBoundingClientRect().bottom - (2 * headerLineHeight);
+      const navEndFadeY = firstTitleTop - firstTitleLineHeight;
       let navOpacity = 1;
       if (navHideLine >= navEndFadeY) {
         navOpacity = 0;
