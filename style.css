@@ -1,27 +1,28 @@
 :root {
+  /* Layout */
   --scale: min(1vw, 1vh);
   --layout-margin: clamp(10px, 0.75vw, 20px);
   --content-side-margin: calc(var(--layout-margin) + 0.35vw);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
-
-  --base-font-size: clamp(16px, calc(0.78rem + 0.24vw), 25px);
-  --ui-font-size: var(--base-font-size);
-  --nav-font-size: calc(var(--base-font-size) + 3px);
-  --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
-  --ui-line-height: 1.5;
-  --content-line-height: 2;
-  --entry-line-height: var(--entry-inner-line-height);
-  --entry-inner-line-height: 1.65;
-  --entry-gap: 0.5em;
-  --section-entry-gap: 0.5em;
-
+  --content-top-gap: var(--section-gap);
+  --section-gap: calc(var(--nav-font-size) * 3);
+  --nav-gap: 0.6rem;
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
-  --nav-gap: 0.6rem;
-  --nav-cv-width: 2.6ch;
-  --nav-contact-width: 6.8ch;
-  --nav-home-width: 4.6ch;
+
+  /* Typography */
+  --base-font-size: clamp(21px, 1.1rem + 0.24vw - 5px, 30px);
+  --ui-font-size: var(--base-font-size);
+  --nav-font-size: var(--base-font-size);
+  --caption-font-size: clamp(9px, calc(0.2vw + 7px), 11px);
+  --main-line-height: 1;
+  --nav-line-height: 1;
+  --entry-line-height: var(--entry-inner-line-height);
+  --entry-inner-line-height: 1;
+
+  /* Vertical rhythm */
+  --entry-gap: 0.75em;
 }
 
 html {
@@ -44,7 +45,7 @@ body {
   font-family: source-serif-pro, serif;
   font-weight: 400;
   font-size: var(--ui-font-size);
-  line-height: var(--ui-line-height);
+  line-height: var(--main-line-height);
   background: white;
   overscroll-behavior: none;
 }
@@ -80,11 +81,11 @@ main {
   display: grid;
   grid-template-columns: repeat(3, max-content);
   align-items: start;
-  column-gap: 2em;
-  padding: calc(var(--layout-margin) + var(--safe-top)) var(--content-side-margin) 0;
+  column-gap: 1.75em;
+  padding: var(--content-side-margin) var(--content-side-margin) 0;
   box-sizing: border-box;
   font-size: var(--nav-font-size);
-  line-height: var(--content-line-height);
+  line-height: var(--nav-line-height);
   font-weight: 500;
   z-index: 2;
   will-change: opacity;
@@ -101,16 +102,20 @@ body.index #buttons {
 #buttons span {
   display: inline-block;
   color: black;
+  font-family: inherit;
   font-style: italic;
-  line-height: var(--content-line-height);
+  letter-spacing: 0.2px;
+  line-height: var(--nav-line-height);
   white-space: nowrap;
-  letter-spacing: 0.0em;
   align-self: start;
   justify-self: start;
 }
 
 #buttons span {
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.075em;
+  text-underline-offset: 0.075em;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -138,17 +143,15 @@ a {
 }
 
 #buttons a.inactive {
-  color: rgba(0, 0, 0, 0.35);
+  color: rgba(0, 0, 0, 1);
+  opacity: 1;
+  text-decoration-color: transparent;
 }
 
 #buttons a.inactive:hover,
 #cv-content a:hover,
 #contact-content a:hover {
   color: rgba(0, 0, 0, 1);
-}
-
-#cv-content a:hover,
-#contact-content a:hover {
   text-decoration-color: currentColor;
 }
 
@@ -222,13 +225,18 @@ body:not(.index) main {
 #cv-content,
 #contact-content {
   width: min(100%, 68ch);
+  padding-top: var(--content-top-gap);
   padding-bottom: var(--layout-margin);
   box-sizing: border-box;
   font-size: var(--ui-font-size);
-  line-height: var(--content-line-height);
+  line-height: var(--main-line-height);
   text-align: left;
   opacity: 0;
   transition: opacity 0.25s ease-out;
+}
+
+#cv-content {
+  font-size: var(--nav-font-size);
 }
 
 #cv-content,
@@ -284,8 +292,18 @@ body:not(.index) main {
 #contact-content .title {
   font-size: var(--nav-font-size);
   font-weight: 400;
-  margin-bottom: var(--section-entry-gap);
+  font-family: inherit;
+  font-style: italic;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  margin-bottom: 0;
+  opacity: 1;
   transition: opacity 0.25s ease;
+}
+
+#cv-content .header-content,
+#contact-content .header-content {
+  font-size: var(--nav-font-size);
 }
 
 #cv-content .title {
@@ -303,14 +321,19 @@ body:not(.index) main {
   opacity: 1;
 }
 
+#cv-content .section .entry:last-child,
+#contact-content .section .entry:last-child {
+  margin-bottom: 0;
+}
+
 #cv-content .section,
 #contact-content .section {
-  margin-bottom: calc(2em * var(--content-line-height));
+  margin-bottom: var(--section-gap);
 }
 
 #cv-content > .section:first-child,
 #contact-content > .section:first-child {
-  margin-top: var(--section-entry-gap);
+  margin-top: 0;
 }
 
 #cv-content .section:last-child,
@@ -320,4 +343,5 @@ body:not(.index) main {
 
 em {
   font-style: italic;
+  letter-spacing: 0.2px;
 }

@@ -31,8 +31,8 @@
       <!-- HEADER -->
       <div class="section">
         <div class="entry header-content">
-          <span class="header-name">Mariusz Maślanka</span><br />
-          <span class="header-meta">b. 1992, based in Oslo, Norway</span>
+          <span class="header-name">Mariusz Maślanka, </span>
+          <span class="header-meta">b. 1992, Poland, based in Oslo</span>
         </div>
       </div>
       
@@ -184,7 +184,6 @@
         navOpacity = (navEndFadeY - navHideLine) / span;
       }
       if (navOpacity <= 0.02) navOpacity = 0;
-      buttons.classList.remove('is-hidden');
       buttons.style.opacity = String(navOpacity);
       buttons.style.pointerEvents = navOpacity <= 0.01 ? 'none' : 'auto';
 
@@ -218,9 +217,12 @@
           opacity = Math.max(0, Math.min(1, remaining / fadeRange));
         }
 
+        const baseTitleOpacity = 1;
         if (opacity <= 0.02) opacity = 0;
-        title.style.opacity = opacity.toFixed(3);
+        title.style.opacity = (opacity * baseTitleOpacity).toFixed(3);
         title.style.transform = 'translateY(0)';
+        title.classList.remove('is-stuck');
+        title.style.fontStyle = '';
       });
     };
 
