@@ -6,7 +6,7 @@
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
   --content-top-gap: calc(var(--section-gap) * 1.25);
-  --section-gap: calc(var(--nav-font-size) * 2.75);
+  --section-gap: calc(var(--nav-font-size) * 2.5);
   --nav-gap: 0.6rem;
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
