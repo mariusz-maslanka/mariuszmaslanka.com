@@ -1,7 +1,7 @@
 :root {
   /* Layout */
   --scale: min(1vw, 1vh);
-  --layout-margin: clamp(10px, 0.75vw, 20px);
+  --layout-margin: clamp(5px, 0.5vw, 25px);
   --content-side-margin: calc(var(--layout-margin) + 0.35vw);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
@@ -81,7 +81,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, max-content);
   align-items: start;
-  column-gap: 1.75em;
+  column-gap: 2em;
   padding: var(--content-side-margin) var(--content-side-margin) 0;
   box-sizing: border-box;
   font-size: var(--nav-font-size);
@@ -194,7 +194,7 @@ a {
   left: 0;
   top: 100%;
   width: 100%;
-  padding-top: 0.75em;
+  padding-top: 0.5em;
   font-size: var(--caption-font-size);
   font-weight: 400;
   text-align: center;
