@@ -5,8 +5,8 @@
   --content-side-margin: calc(var(--layout-margin) + 0.35vw);
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
-  --content-top-gap: var(--section-gap);
-  --section-gap: calc(var(--nav-font-size) * 3);
+  --content-top-gap: calc(var(--section-gap) * 1.25);
+  --section-gap: calc(var(--nav-font-size) * 2.75);
   --nav-gap: 0.6rem;
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
@@ -104,7 +104,7 @@ body.index #buttons {
   color: black;
   font-family: inherit;
   font-style: italic;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.01em;
   line-height: var(--nav-line-height);
   white-space: nowrap;
   align-self: start;
@@ -295,7 +295,7 @@ body:not(.index) main {
   font-family: inherit;
   font-style: italic;
   letter-spacing: 0.2px;
-  line-height: 1.25;
+  line-height: 2.75;
   margin-bottom: 0;
   opacity: 1;
   transition: opacity 0.25s ease;
@@ -343,5 +343,5 @@ body:not(.index) main {
 
 em {
   font-style: italic;
-  letter-spacing: 0.2px;
+  letter-spacing: 0;
 }
