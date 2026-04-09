@@ -295,7 +295,7 @@ body:not(.index) main {
   font-family: inherit;
   font-style: italic;
   letter-spacing: 0.2px;
-  line-height: 1;
+  line-height: 2;
   margin-bottom: 0;
   opacity: 1;
   transition: opacity 0.25s ease;
