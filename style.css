@@ -6,7 +6,7 @@
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
   --content-top-gap: var(--section-gap);
-  --section-gap: calc(var(--nav-font-size) * 2.5);
+  --section-gap: calc(var(--nav-font-size) * 2);
   --nav-gap: 0.6rem;
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
@@ -22,7 +22,7 @@
   --entry-inner-line-height: 1;
 
   /* Vertical rhythm */
-  --entry-gap: 0.65em;
+  --entry-gap: 1em;
 }
 
 html {
