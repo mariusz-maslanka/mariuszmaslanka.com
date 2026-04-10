@@ -308,7 +308,7 @@ body:not(.index) main {
 
 #cv-content .title {
   position: sticky;
-  top: calc(var(--layout-margin) + var(--safe-top));
+  top: var(--safe-top);
   z-index: 1;
   background: transparent;
   will-change: opacity;
