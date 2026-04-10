@@ -14,7 +14,7 @@
   /* Typography */
   --base-font-size: clamp(21px, 1.1rem + 0.24vw - 5px, 30px);
   --ui-font-size: var(--base-font-size);
-  --nav-font-size: calc(var(--base-font-size) + 0.25rem);
+  --nav-font-size: calc(var(--base-font-size) + 0.2rem);
   --caption-font-size: clamp(10px, 0.75vw, 15px);
   --main-line-height: 1;
   --nav-line-height: 1;
