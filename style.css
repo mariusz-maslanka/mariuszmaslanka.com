@@ -22,7 +22,7 @@
   --entry-inner-line-height: 1;
 
   /* Vertical rhythm */
-  --entry-gap: 1em;
+  --entry-gap: 0.75em;
 }
 
 html {
