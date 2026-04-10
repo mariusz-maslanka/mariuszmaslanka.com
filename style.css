@@ -102,8 +102,8 @@ body.index #buttons {
 #buttons span {
   display: inline-block;
   color: black;
-font-family: kepler-std, serif;
-  font-style: normal;
+  font-family: inherit;
+  font-style: italic;
   letter-spacing: 0.01em;
   line-height: var(--nav-line-height);
   white-space: nowrap;
