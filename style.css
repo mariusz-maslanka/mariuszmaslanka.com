@@ -12,7 +12,7 @@
   --gallery-offset: calc(var(--scale) * 1.125);
 
   /* Typography */
-  --base-font-size: clamp(18px, 1rem + 0.25vw, 28px);
+  --base-font-size: clamp(19px, 1rem + 0.25vw, 28px);
   --ui-font-size: var(--base-font-size);
   --nav-font-size: calc(var(--base-font-size) + 0.15rem);
   --caption-font-size: clamp(10px, 0.75vw, 15px);
