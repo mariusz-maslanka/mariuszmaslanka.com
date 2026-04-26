@@ -6,7 +6,7 @@
   --photo-vertical-buffer: calc(var(--scale) * 9);
   --photo-side-margin: var(--content-side-margin);
   --content-top-gap: var(--section-gap);
-  --section-gap: calc(var(--nav-font-size) * 2);
+  --section-gap: calc(var(--nav-font-size) * 3);
   --nav-gap: 0.6rem;
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
@@ -20,6 +20,8 @@
   --nav-line-height: 1;
   --entry-line-height: var(--entry-inner-line-height);
   --entry-inner-line-height: 1;
+  --underline-thickness: 1px;
+  --underline-offset: 0.1em;
 
   /* Vertical rhythm */
   --entry-gap: 1em;
@@ -114,8 +116,8 @@ font-family: kepler-std, serif;
 #buttons span {
   text-decoration: underline;
   text-decoration-color: currentColor;
-  text-decoration-thickness: 0.05em;
-  text-underline-offset: 0.1em;
+  text-decoration-thickness: var(--underline-thickness);
+  text-underline-offset: var(--underline-offset);
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -129,8 +131,8 @@ a {
   color: black;
   text-decoration: underline;
   text-decoration-color: transparent;
-  text-decoration-thickness: 0.05em;
-  text-underline-offset: 0.1em;
+  text-decoration-thickness: var(--underline-thickness);
+  text-underline-offset: var(--underline-offset);
   transition: none;
 }
 
@@ -139,6 +141,7 @@ a {
   transition-duration: 0s;
   transition-timing-function: linear;
   transition-delay: 0s;
+  text-decoration-thickness: var(--underline-thickness);
   opacity: 1;
 }
 
