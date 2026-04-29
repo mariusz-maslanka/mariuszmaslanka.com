@@ -81,7 +81,8 @@ main {
   position: sticky;
   top: 0;
   display: grid;
-  grid-template-columns: repeat(3, max-content);
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
   align-items: start;
   column-gap: 2em;
   padding: var(--content-side-margin) var(--content-side-margin) 0;
