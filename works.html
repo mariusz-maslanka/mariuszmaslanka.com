@@ -37,9 +37,20 @@
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-      requestAnimationFrame(() => {
-        document.body.classList.add('page-loaded');
-      });
+      const revealPage = () => {
+        requestAnimationFrame(() => {
+          document.body.classList.add('page-loaded');
+        });
+      };
+
+      if (document.fonts && document.fonts.ready) {
+        Promise.race([
+          document.fonts.ready,
+          new Promise((resolve) => setTimeout(resolve, 700))
+        ]).then(revealPage);
+      } else {
+        revealPage();
+      }
     });
   </script>
 </body>
