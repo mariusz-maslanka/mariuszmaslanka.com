@@ -66,6 +66,10 @@ body.contact {
   overflow: hidden;
 }
 
+body.works {
+  overflow: hidden;
+}
+
 main {
   flex: 1;
   min-height: 0;
