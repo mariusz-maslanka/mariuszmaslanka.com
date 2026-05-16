@@ -184,7 +184,7 @@
 
     const updateScrollEffects = () => {
       const stickyTop = getStickyTop();
-      const navHideLine = stickyTop - 5;
+      const navHideLine = stickyTop + 5;
       const firstTitleTop = titles[0].getBoundingClientRect().top;
       const headerLineHeight = parseFloat(getComputedStyle(headerContent).lineHeight) || 0;
       const firstTitleLineHeight = parseFloat(getComputedStyle(titles[0]).lineHeight) || headerLineHeight;
@@ -201,7 +201,7 @@
       buttons.style.opacity = String(navOpacity);
       buttons.style.pointerEvents = navOpacity <= 0.01 ? 'none' : 'auto';
 
-      const titleHideLine = stickyTop - 10;
+      const titleHideLine = stickyTop;
       titles.forEach((title, index) => {
         const section = sectionByTitle.get(title);
         if (!section) return;
