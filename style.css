@@ -1,5 +1,4 @@
 :root {
-  /* Layout */
   --scale: min(1vw, 1vh);
   --layout-margin: clamp(10px, 0.5vw, 25px);
   --content-side-margin: calc(var(--layout-margin) + 0.35vw);
@@ -11,14 +10,9 @@
   --safe-top: env(safe-area-inset-top);
   --gallery-offset: calc(var(--scale) * 1.125);
 
-  /* Typography */
-  /* One-font test: change these display variables to restore a separate heading/nav face. */
-  --site-font-family: source-serif-pro, serif;
-  --display-font-family: var(--site-font-family);
-  --display-font-style: normal;
-  --base-font-size: clamp(19px, 1rem + 0.25vw, 28px);
+  --base-font-size: clamp(16px, 0.8rem + 0.25vw, 24px);
   --ui-font-size: var(--base-font-size);
-  --nav-font-size: var(--base-font-size);
+  --nav-font-size: calc(var(--base-font-size) + 0.15rem);
   --caption-font-size: clamp(10px, 0.75vw, 15px);
   --main-line-height: 1.1;
   --nav-line-height: 1.1;
@@ -27,7 +21,6 @@
   --underline-thickness: 1px;
   --underline-offset: 0.1em;
 
-  /* Vertical rhythm */
   --entry-gap: 1.1em;
 }
 
@@ -48,7 +41,7 @@ body {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  font-family: var(--site-font-family);
+  font-family: source-serif-pro, serif;
   font-weight: 400;
   font-size: var(--ui-font-size);
   line-height: var(--main-line-height);
@@ -112,7 +105,7 @@ body.index #buttons {
 #buttons span {
   display: inline-block;
   color: black;
-  font-family: var(--display-font-family);
+font-family: kepler-std-subhead, serif;
   font-style: normal;
   font-weight: 300;
   letter-spacing: 0.01em;
@@ -298,8 +291,8 @@ body:not(.index) main {
 
 #cv-content .title,
 #contact-content .title {
-  font-family: var(--display-font-family);
-  font-style: var(--display-font-style);
+font-family: kepler-std-subhead, serif;
+  font-style: italic;
   font-size: var(--nav-font-size);
   font-weight: 300;
   letter-spacing: 0.01em;
@@ -352,11 +345,4 @@ body:not(.index) main {
 em {
   font-style: italic;
   letter-spacing: 0.01em;
-}
-
-@media (max-width: 700px) {
-  :root {
-    --base-font-size: 17px;
-    --caption-font-size: 9px;
-  }
 }
