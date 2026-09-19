@@ -13,7 +13,7 @@
   --base-font-size: clamp(16px, 0.8rem + 0.25vw, 24px);
   --ui-font-size: var(--base-font-size);
   --nav-font-size: calc(var(--base-font-size) + 0.15rem);
-  --caption-font-size: clamp(10px, 0.75vw, 15px);
+  --caption-font-size: clamp(10px, 0.7vw, 15px);
   --main-line-height: 1.1;
   --nav-line-height: 1.1;
   --entry-line-height: var(--entry-inner-line-height);
@@ -199,7 +199,7 @@ a {
   left: 0;
   top: 100%;
   width: 100%;
-  padding-top: 0.8em;
+  padding-top: 0.7em;
   font-size: var(--caption-font-size);
   font-weight: 400;
   text-align: center;
@@ -210,7 +210,7 @@ a {
 
 #photo-info p {
   margin: 0;
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
 #photo.loaded,
